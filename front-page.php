@@ -9,17 +9,13 @@
         <div id="root" class="w-75 m-auto">
             <div class="body1 w-100 d-flex flex-column justify-content-center align-items-center">
                 <div class='container1 w-100'>
-                    <form id="presently" class='d-flex flex-column' action="" method="" autocomplete="off">
-                        <label>
-                            <input class="w-100 p-1" style="outline: none;" type="text" placeholder="What do you need to do?" name="title"></input>
-                        </label>
-                        <button class="btn btn-primary" type="submit">Add &nbsp; <span>&#43;</span></button>
-                    </form>
+                    <?php get_template_part('includes/form', 'todolist') ?>
                 </div>
 
                 <div class="container2 w-100">
                     <h1 class="text-center mt-3">todos</h1>
-                    <div class="date">
+                    <?php get_template_part('includes/content', 'todolist'); ?>
+                    <!-- <div class="date">
                         <h6 class="pl-3 text-primary">12/02/2023</h6>
                         <div class="todo-item border border-1 mb-2 px-3 rounded">
                             <button class="d-block float-right border rounded mt-1 ">x</button>
@@ -54,7 +50,7 @@
                             <h5>bbbbbbbbbb</h5>
                             <small>created:</small>
                         </div>
-                    </div>
+                    </div> -->
                 </div>
             </div>
         </div>
