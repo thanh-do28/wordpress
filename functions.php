@@ -22,6 +22,15 @@ function load_js()
 }
 add_action("wp_enqueue_scripts", 'load_js');
 
+function wpse_script_loader_tag($tag, $handle)
+{
+    if ('jquery-fluidbox' !== $handle) {
+        return $tag;
+    }
+
+    return str_replace(' src', ' data-cfasync="false" src', $tag);
+}
+add_filter('script_loader_tag', 'wpse_script_loader_tag', 10, 2);
 
 // theme options
 add_theme_support('menus');
@@ -36,3 +45,33 @@ register_nav_menus(
         'mobile-menu' => 'Mobile Menu Location',
     )
 );
+
+
+add_action('wp_ajax_checkbox', 'updata_checkbox');
+add_action('wp_ajax_nopriv_checkbox', 'updata_checkbox');
+
+function updata_checkbox()
+{
+
+    $formdata = [];
+    wp_parse_str($_POST['checkbox'], $formdata);
+
+    $id = $formdata['id'];
+    global $wpdb;
+    // // this is how you get access to the database
+    $result = $wpdb->get_results("SELECT checked FROM wp_todos WHERE id = $id");
+    // this is required to terminate immediately and return a proper response
+
+    $checked = $result[0]->checked;
+    $aChecked = !$checked;
+
+    $results = $wpdb->update(
+        'wp_todos',
+        array(
+            'checked' => $aChecked,    // string
+        ),
+        array('id' => $id)
+    );
+
+    wp_send_json_success([$results, $aChecked]);
+}
