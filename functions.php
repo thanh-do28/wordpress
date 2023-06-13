@@ -86,19 +86,25 @@ function inset_presently()
     wp_parse_str($_POST['presently'], $formdata);
 
     $title = $formdata['title'];
+    $id = "";
+    // wp_send_json_success(isset($id));
 
-    if (empty($title)) {
-        wp_send_json_success('erro');
+    if (empty($id)) {
+        wp_send_json_success('erroid');
     } else {
-        global $wpdb;
-        $results = $wpdb->insert(
-            'wp_todos',
-            array(
-                'title' => $title,
-                'user_id' => 14,
-            ),
-        );
-        wp_send_json_success($results);
+        if (empty($title)) {
+            wp_send_json_success('errotitle');
+        } else {
+            global $wpdb;
+            $results = $wpdb->insert(
+                'wp_todos',
+                array(
+                    'title' => $title,
+                    'user_id' => $id,
+                ),
+            );
+            wp_send_json_success($results);
+        }
     }
 }
 
