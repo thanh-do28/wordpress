@@ -2,7 +2,7 @@
 
 
 global $wpdb;
-$result = $wpdb->get_results('SELECT * FROM wp_todos WHERE user_id = 15 ORDER BY date_time DESC');
+$result = $wpdb->get_results('SELECT * FROM wp_todos WHERE user_id = 18 ORDER BY date_time DESC');
 
 
 $todolist = [];
@@ -20,15 +20,15 @@ $dates = array_unique($datelist);
 // print_r($dates);
 ?>
 <?php if (empty($result)) { ?>
-    <div class="todoList">
-        <img src="<?php echo get_template_directory_uri(); ?>../images/to-do-7214069__340.webp" alt="" />
+    <div class="todoList text-center">
+        <img class=" my-4" src="<?php echo get_template_directory_uri(); ?>../images/to-do-7214069__340.webp" alt="" />
         <h2>Add your first todo</h2>
         <p>What do you want to get done today?</p>
     </div>
     <?php } else {
     if (count($todolist) <= 0) { ?>
-        <div class="todoList">
-            <img src="<?php echo get_template_directory_uri(); ?>../images/to-do-7214069__340.webp" alt="" />
+        <div class="todoList text-center ">
+            <img class="my-4" src="<?php echo get_template_directory_uri(); ?>../images/to-do-7214069__340.webp" alt="" />
             <h2>Add your first todo</h2>
             <p>What do you want to get done today?</p>
         </div>
@@ -44,7 +44,7 @@ $dates = array_unique($datelist);
                 // echo date("d-m-Y", strtotime($todos->date_time));
                 if (date("d-m-Y", strtotime($todos->date_time)) == $date) { ?>
                     <div id="todo" class="todo-item border border-1 mb-2 px-3 rounded">
-                        <button class="d-block float-right border rounded mt-1 ">x</button>
+                        <button class="delete d-block float-right border rounded mt-1 " id_todo="<?php echo $todos->id; ?>">x</button>
                         <?php if ($todos->checked) { ?>
                             <input type="checkbox" class="check-box" id="<?php echo $todos->id; ?>" checked />
                             <h6 class="text-muted <?php echo $todos->id; ?> " style="text-decoration: line-through;"><?php echo $todos->title; ?></h6>
@@ -107,6 +107,34 @@ $dates = array_unique($datelist);
             })
 
 
+        })
+
+        $(".delete").click(function(event) {
+            const id = $(this).attr("id_todo")
+            var ids = `id=${id}`;
+            var endpoint = '<?php echo admin_url('admin-ajax.php'); ?>'
+
+            var formdata = new FormData;
+            formdata.append('action', 'delete');
+            formdata.append('delete', ids);
+
+            $.ajax(endpoint, {
+                type: 'POST',
+                data: formdata,
+                processData: false,
+                contentType: false,
+
+                success: function(res) {
+                    // console.log(res.data);
+
+                    location.reload();
+
+                },
+
+                error: function(err) {
+
+                }
+            })
         })
     })
 </script>

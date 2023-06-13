@@ -75,3 +75,44 @@ function updata_checkbox()
 
     wp_send_json_success([$results, $aChecked]);
 }
+
+
+add_action('wp_ajax_presently', "inset_presently");
+add_action('wp_ajax_nopriv_presently', 'inset_presently');
+
+function inset_presently()
+{
+    $formdata = [];
+    wp_parse_str($_POST['presently'], $formdata);
+
+    $title = $formdata['title'];
+
+    if (empty($title)) {
+        wp_send_json_success('erro');
+    } else {
+        global $wpdb;
+        $results = $wpdb->insert(
+            'wp_todos',
+            array(
+                'title' => $title,
+                'user_id' => 14,
+            ),
+        );
+        wp_send_json_success($results);
+    }
+}
+
+
+add_action('wp_ajax_delete', "delete_todo");
+add_action('wp_ajax_nopriv_delete', 'delete_todo');
+
+function delete_todo()
+{
+    $formdata = [];
+    wp_parse_str($_POST['delete'], $formdata);
+
+    $id = $formdata['id'];
+    global $wpdb;
+    $results = $wpdb->delete('wp_todos', array('id' => $id));
+    wp_send_json_success($results);
+}
