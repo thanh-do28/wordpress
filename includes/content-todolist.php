@@ -2,7 +2,7 @@
 
 
 global $wpdb;
-$result = $wpdb->get_results('SELECT * FROM wp_todos WHERE user_id = 18 ORDER BY date_time DESC');
+$result = $wpdb->get_results('SELECT * FROM wp_todos WHERE user_id = "" ORDER BY date_time DESC');
 
 
 $todolist = [];
