@@ -28,13 +28,14 @@
                 contentType: false,
 
                 success: function(res) {
-                    console.log(res.data);
+                    // console.log(res.data);
                     if (res.data == 'errotitle') {
                         alert("todo cannot be left blank")
                     } else if (res.data == 'erroid') {
                         alert("you must login")
                     } else {
-                        // location.reload();
+                        // console.log(res.data);
+                        location.reload();
                     }
 
 

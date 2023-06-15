@@ -1,21 +1,25 @@
 <?php
 
 
-global $wpdb;
-$result = $wpdb->get_results('SELECT * FROM wp_todos WHERE user_id = "" ORDER BY date_time DESC');
+if (isset($_COOKIE["user_login_id"])) {
+    $id = $_COOKIE["user_login_id"];
+    global $wpdb;
+    $result = $wpdb->get_results("SELECT * FROM wp_todos WHERE user_id = $id ORDER BY date_time DESC");
 
 
-$todolist = [];
-$datelist = [];
-foreach ($result as $todo) {
-    // print_r($todo);
-    // $data = json_encode((array)$todo);
-    array_push($todolist, $todo);
-    // echo $data;
-    array_push($datelist, date("d-m-Y", strtotime($todo->date_time)));
-};
+    $todolist = [];
+    $datelist = [];
+    foreach ($result as $todo) {
+        // print_r($todo);
+        // $data = json_encode((array)$todo);
+        array_push($todolist, $todo);
+        // echo $data;
+        array_push($datelist, date("d-m-Y", strtotime($todo->date_time)));
+    };
 
-$dates = array_unique($datelist);
+    $dates = array_unique($datelist);
+}
+
 // print_r($todolist);
 // print_r($dates);
 ?>
