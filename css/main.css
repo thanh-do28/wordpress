@@ -18,6 +18,11 @@ header .top-bar {
   padding: 0;
   display: flex;
 }
+header .top-bar li {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
 header .top-bar li a {
   padding: 0.25rem 1rem;
   color: #fff;
@@ -27,4 +32,13 @@ header .top-bar li:first-child a {
 }
 header .top-bar li:last-child a {
   padding-right: 0;
+}
+header .top-bar #menu-item-21 .user-img {
+  padding-left: 1rem;
+}
+header .top-bar #menu-item-21 .user-img .img img {
+  width: 40px;
+}
+header .top-bar #menu-item-21 .user-img .name {
+  color: #fff;
 }
