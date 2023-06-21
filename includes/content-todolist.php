@@ -51,7 +51,7 @@ if (isset($_COOKIE["user_login_id"])) {
                         <button class="delete d-block float-right border rounded mt-1 " id_todo="<?php echo $todos->id; ?>">x</button>
                         <?php if ($todos->checked) { ?>
                             <input type="checkbox" class="check-box" id="<?php echo $todos->id; ?>" checked />
-                            <h6 class="text-muted <?php echo $todos->id; ?> " style="text-decoration: line-through;"><?php echo $todos->title; ?></h6>
+                            <h6 class="h6 text-muted <?php echo $todos->id; ?> "><?php echo $todos->title; ?></h6>
                         <?php } else { ?>
                             <input type="checkbox" class="check-box" id="<?php echo $todos->id; ?>" />
                             <h6 class="<?php echo $todos->id; ?>"><?php echo $todos->title; ?></h6>

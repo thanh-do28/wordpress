@@ -10,10 +10,11 @@
     <?php wp_head() ?>
 
     <link rel="stylesheet" href="style.css">
+
 </head>
 
 <body>
-
+    <?php ?>
     <header>
         <div class="container">
             <div class="menu-top-bas-container">
@@ -30,8 +31,19 @@
                                 <span class="img">
                                     <img src="<?php echo get_template_directory_uri(); ?>./images/none-avatar.png" alt="#">
                                 </span>
-                                <span class="name"><?php echo $_COOKIE['user_login_name']; ?></span>
+
+
+                                <button id="btn-dropdow" type="button" class="btn-dropdow dropdown-toggle-btn ">
+                                </button>
                             </div>
+                            <div id="dropdow-nav">
+                                <div class="dropdow-nav">
+                                    <span class=" nav-cral"><?php echo $_COOKIE['user_login_name']; ?></span>
+                                    <a class="nav-cral" href="#">edit personal page</a>
+                                    <button id="btn-logout" class="nav-cral">Log out</button>
+                                </div>
+                            </div>
+
                         </li>
 
 
@@ -39,8 +51,6 @@
                         <li id="menu-item-20" class="menu-item menu-item-type-post_type menu-item-object-page current-menu-item page_item page-item-15 current_page_item menu-item-20"><a href="http://localhost/wordpress/login/" aria-current="page">Login</a></li>
                         <li id="menu-item-45" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-45"><a href="http://localhost/wordpress/register/">Register</a></li>
                     <?php } ?>
-
-
 
                 </ul>
             </div>
